@@ -1,0 +1,16 @@
+/**
+ * Fix The Logo
+ * Crops out the ugly "by Yahoo" part of the logo.
+ */
+
+td.FlickrLogo a {
+  display: block;
+  overflow: hidden;
+  width: 103px;
+  -webkit-transition: width 0.35s ease-out;
+}
+
+td.FlickrLogo a:hover {
+  width: 180px;
+}
+  

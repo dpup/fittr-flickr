@@ -1,0 +1,23 @@
+/**
+ * Styles for the Exif table.
+ */
+
+#xxxExifDisplayEl {
+  font-size: 8pt;
+  color: #999;  
+  -webkit-transition: height 0.35s ease-out;
+  overflow: hidden;
+}
+
+.xxxExifTable {
+  border-bottom: 1px solid #AAA;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.xxxExifTable td {
+  font-size: 8pt !important;
+  color: #999;
+  border-top: 1px dotted #AAA;
+  padding: 3px;
+}

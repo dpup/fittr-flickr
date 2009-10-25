@@ -1,0 +1,66 @@
+/**
+ * Styles for the help dialog.
+ */
+
+.xxxDialog {
+  position: fixed;
+  z-index: 10000;
+  top: 50%;
+  left: 50%;
+  margin-left: -200px;
+  margin-top: -150px;
+  width: 400px;
+  height: 300px;
+  color: #fff;
+  outline: 0;
+  text-align: left;
+}
+
+.xxxDialogBg {
+  position: absolute;
+  width: 400px;
+  height: 300px;
+  background-color: #000;
+  color: #fff;
+  -webkit-border-radius: 15px;
+  opacity: 0.8;
+}
+
+.xxxDialogContent {
+  position: absolute;
+  width: 370px;
+  height: 285px;
+  color: #fff;
+  padding: 0 15px 15px 15px;
+}
+
+.xxxTitle {
+  position: relative;
+  color: #AAA;
+  font: bold 10pt verdana, arial, sans-serif;
+  border-bottom: 1px solid #AAA;
+  padding-top: 15px;
+  padding-bottom: 5px;
+}
+
+.xxxClose {
+  position: absolute;
+  bottom: 5px;
+  right: 0px;
+  font: normal 8pt verdana, arial, sans-serif;
+}
+
+.xxxHeader {
+  font: bold 10pt verdana, arial, sans-serif;
+  margin-top: 15px;
+  margin-bottom: 3px;
+}
+
+.xxxKey {
+  font: normal 10pt verdana, arial, sans-serif;
+  margin-bottom: 3px;
+}
+
+.xxxDialog b {
+  color: #FF0084;
+}

@@ -1,0 +1,19 @@
+
+/*
+.photoImgDiv {
+  text-align: center;
+  width: 500px !important;  
+}
+*/
+
+
+.xxxFakeLink {
+  cursor: pointer;
+}
+
+.xxxDisabledLink, .xxxDisabledLink:hover {
+  text-decoration: none !important;
+  color: #BBB !important;
+  cursor: default !important;
+  background-color: transparent !important;
+}
