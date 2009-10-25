@@ -1,0 +1,45 @@
+{
+  "name": "Fittr Flickr",
+  "version": "1.2",
+  "description": "Making Flickr more fitter.",
+  "content_scripts": [
+    {
+      "matches": ["http://www.flickr.com/*"],
+      "js": ["utils/utils.js",
+             "utils/api.js",
+             "utils/cache.js",
+             "utils/dom.js",
+             "utils/page.js",
+             "utils/re.js",
+             
+             "features/bighugelabs.js",
+             "features/canonical-url.js",
+             "features/easy-exif.js",
+             "features/easy-links.js",
+             "features/light-box.js",
+             "features/nice-reply.js",
+             
+             "features/keyboard.js"
+            ],
+      "css": ["css/common.css",
+              "css/dialog.css",
+              "css/exif.css",
+              "css/fix-the-logo.css",
+              "css/light-box.css"
+            ]
+    }
+  ],
+  "page_actions": [
+    {
+      "id": "gotopage",
+      "name": "Go to Flickr photo page.",
+      "icons": ["img/favicon.ico"]
+    }
+  ],
+  "background_page": "api_relay.html",
+  "update_url": "http://endoflow.com/fittr-flickr/updates.xml",
+  "permissions": [
+    "tabs",
+    "http://api.flickr.com/*"
+  ]
+}
