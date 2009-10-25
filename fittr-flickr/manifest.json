@@ -1,6 +1,6 @@
 {
   "name": "Fittr Flickr",
-  "version": "1.2.2",  // Remember to update fittr.VERSION
+  "version": "1.2.3",  // Remember to update fittr.VERSION
   "description": "Making Flickr more fitter.",
   "content_scripts": [
     {
