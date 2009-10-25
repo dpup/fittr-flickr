@@ -99,14 +99,14 @@ var lightbox = (function() {
     var maxH = document.body.clientHeight - 20;
     var maxW = document.body.clientWidth - 20;
     if (h > maxH) {
-      var diff = h / maxH;
+      var dh = h / maxH;
       h = maxH;
-      w = w / diff;
+      w = w / dh;
     }
     if (w > maxW) {
-      var diff = w / maxW;
+      var dw = w / maxW;
       w = maxW;
-      h = h / diff;
+      h = h / dw;
     }
     
     var div = createEl('div');

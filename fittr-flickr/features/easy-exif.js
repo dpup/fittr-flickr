@@ -30,8 +30,7 @@ var exif = (function() {
     ISO: 1,
     ExposureCompensation: 1,
     FocalLength: 1,
-    Lens: 1,
-    
+    Lens: 1
   };
   
   var link;
