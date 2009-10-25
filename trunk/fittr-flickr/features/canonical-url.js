@@ -50,10 +50,6 @@
       li.appendChild(createText(')'));
       
       el.parentNode.insertBefore(li, el.parentNode.firstChild);
-    } else {
-      console.log('Cannot find element to add info.');    
     }
-  } else {
-    console.log('No photo id found in URL.');
   }
 })();
