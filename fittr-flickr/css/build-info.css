@@ -1,0 +1,13 @@
+
+.xxxBuildInfo {
+  color: #aaa;
+  font: normal 9px verdana, sans-serif;
+}
+
+.xxxBuildInfo a {
+  color: #aaa !important;
+}
+
+.xxxBuildInfo a:hover {
+  color: #fff !important;
+}
