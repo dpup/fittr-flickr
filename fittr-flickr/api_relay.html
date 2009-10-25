@@ -68,12 +68,10 @@ function makeRequest(port, type, params) {
 
 // Listen for tab changes and enable the page action if appropriate.
 chrome.tabs.onUpdated.addListener(function(tabId, changeInfo) {
-  console.log('Tab updated');
   checkTabForFlickrImg(tabId);
 });
 
 chrome.tabs.onCreated.addListener(function(tab) {
-  console.log('Tab created');
   checkTabForFlickrImg(tab.id);
 });
 
@@ -86,8 +84,6 @@ function checkTabForFlickrImg(tab) {
         tabId: tab,
         url: url
       });
-    } else {
-      console.log('Not a flickr img: ' + url);
     }
   });
 }

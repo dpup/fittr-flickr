@@ -18,8 +18,6 @@
     a1.appendChild(createText('View on Black'));
     li.appendChild(a1);
     el.parentNode.insertBefore(li, el.parentNode.firstChild);
-  } else {
-    console.log('Cannot find element to add BHL link.');    
   }
   
   // Add a link the the Scout page on a users photostream page.
