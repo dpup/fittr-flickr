@@ -1,6 +1,6 @@
 {
   "name": "Fittr Flickr",
-  "version": "1.2.1",  // Remember to update fittr.VERSION
+  "version": "1.2.2",  // Remember to update fittr.VERSION
   "description": "Making Flickr more fitter.",
   "content_scripts": [
     {
@@ -40,7 +40,7 @@
     }
   ],
   "background_page": "api_relay.html",
-  "update_url": "http://endoflow.com/fittr-flickr/updates.xml",
+  "update_url": "http://fittr.googlecode.com/svn/trunk/updates.xml",
   "permissions": [
     "tabs",
     "http://api.flickr.com/*"
