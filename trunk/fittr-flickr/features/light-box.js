@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */**
+ *
  * Light-Box
  * Allows you to quickly view the large version of a photo without having to switch pages.
  */
