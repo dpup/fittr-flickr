@@ -4,7 +4,7 @@
  */
 
 
-.xxxMagnify {
+.fittr-magnify-icon {
   position: absolute;
   z-index: 10000;
   right: 2px;
@@ -14,7 +14,7 @@
 }
 
 
-.xxxLightBox {
+.fittr-lightbox {
   position: fixed;
   z-index: 10000;
   top: 50%;
@@ -26,7 +26,7 @@
   -webkit-box-shadow: 0 0 20px #333;
 }
 
-.xxxLightBoxBg {
+.fittr-lightbox-bg {
   position: fixed;
   top: 0;
   left: 0;
@@ -37,7 +37,7 @@
   z-index: 15000;
 }
 
-.xxxLightBox img {
+.fittr-lightbox img {
   position: absolute;
   cursor: pointer;
 }

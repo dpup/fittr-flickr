@@ -57,16 +57,16 @@ var exif = (function() {
   }
   
   function getExifEl() {
-    var el = getEl('xxxExifDisplayEl');
+    var el = getEl('fittr-exif-dislay');
     if (!el) {
       el = createEl('div');
-      el.id = 'xxxExifDisplayEl';
+      el.id = 'fittr-exif-dislay';
       el.innerHTML = '<i>Loading</i>';
       link.parentNode.parentNode.insertBefore(el, link.parentNode.nextSibling);
 
       api.makeApiRequest(api.RequestType.GET_EXIF, {photo_id: page.getPhotoId()}, function(data) {
         if (data.status == 200 && data.content.stat == 'ok') {
-          var html = '<table class="xxxExifTable">';
+          var html = '<table class="fittr-exif-table">';
           var seen = {};
           for (var i = 0; i < data.content.photo.exif.length; i++) {
             var item = data.content.photo.exif[i];

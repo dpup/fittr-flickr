@@ -2,7 +2,7 @@
  * Styles for the help dialog.
  */
 
-.xxxDialog {
+.fittr-dialog {
   position: fixed;
   z-index: 10000;
   top: 50%;
@@ -16,7 +16,7 @@
   text-align: left;
 }
 
-.xxxDialogBg {
+.fittr-dialog-bg {
   position: absolute;
   width: 400px;
   height: 300px;
@@ -26,7 +26,7 @@
   opacity: 0.8;
 }
 
-.xxxDialogContent {
+.fittr-dialog-content {
   position: absolute;
   width: 370px;
   height: 285px;
@@ -34,7 +34,7 @@
   padding: 0 15px 15px 15px;
 }
 
-.xxxTitle {
+.fittr-dialog-title {
   position: relative;
   color: #AAA;
   font: bold 10pt verdana, arial, sans-serif;
@@ -43,24 +43,24 @@
   padding-bottom: 5px;
 }
 
-.xxxClose {
+.fittr-dialog-close {
   position: absolute;
   bottom: 5px;
   right: 0px;
   font: normal 8pt verdana, arial, sans-serif;
 }
 
-.xxxHeader {
+.fittr-dialog-header {
   font: bold 10pt verdana, arial, sans-serif;
   margin-top: 15px;
   margin-bottom: 3px;
 }
 
-.xxxKey {
+.fittr-dialog-key {
   font: normal 10pt verdana, arial, sans-serif;
   margin-bottom: 3px;
 }
 
-.xxxDialog b {
+.fittr-dialog b {
   color: #FF0084;
 }

@@ -28,7 +28,7 @@ function addPhotoLink(caption, title, opt_url) {
     link.href = opt_url;
     link.className = 'Plain';
   } else {
-    link.className = 'xxxFakeLink';
+    link.className = 'fittr-fake-link';
   }
   link.id = 'photolink_' + title.replace(/[^a-z0-9]/i, '');
   link.title = title;

@@ -23,7 +23,7 @@
   var aboutEl = query('.About')[0];
   if (aboutEl) {
     var el = createEl('span');
-    el.className = 'xxxBuildInfo';
+    el.className = 'fittr-build-info';
     el.innerHTML = '<a href="http://code.google.com/p/fittr/">Fittr Flickr</a> v' + fittr.VERSION;
     aboutEl.appendChild(el);
   }

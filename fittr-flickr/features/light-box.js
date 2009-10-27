@@ -110,7 +110,7 @@ var lightbox = (function() {
     }
     
     var div = createEl('div');
-    div.className = 'xxxLightBox';
+    div.className = 'fittr-lightbox';
     div.tabIndex = '0';
     
     div.style.width = w + 'px';
@@ -125,7 +125,7 @@ var lightbox = (function() {
     activeLightBox = true;
     
     var bg = createEl('div');
-    bg.className = 'xxxLightBoxBg';
+    bg.className = 'fittr-lightbox-bg';
     bg.addEventListener('click', closeLightBox);
     document.body.appendChild(bg);
     
@@ -151,7 +151,7 @@ var lightbox = (function() {
     img.src = chrome.extension.getURL('img/magnify.png');
     img.width = '19';
     img.height = '19';
-    img.className = 'xxxMagnify';
+    img.className = 'fittr-magnify-icon';
     img.title = 'Clicking the image when this icon is showing will open ' +
                 'a large copy in a light-box';
     img.style.left = (thePhoto.offsetWidth - 19) + 'px';

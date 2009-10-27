@@ -2,20 +2,20 @@
  * Styles for the Exif table.
  */
 
-#xxxExifDisplayEl {
+#fittr-exif-dislay {
   font-size: 8pt;
   color: #999;  
   -webkit-transition: height 0.35s ease-out;
   overflow: hidden;
 }
 
-.xxxExifTable {
+.fittr-exif-table {
   border-bottom: 1px solid #AAA;
   width: 100%;
   border-collapse: collapse;
 }
 
-.xxxExifTable td {
+.fittr-exif-table td {
   font-size: 8pt !important;
   color: #999;
   border-top: 1px dotted #AAA;
