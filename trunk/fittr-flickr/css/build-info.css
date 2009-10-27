@@ -1,13 +1,13 @@
 
-.xxxBuildInfo {
+.fittr-build-info {
   color: #aaa;
   font: normal 9px verdana, sans-serif;
 }
 
-.xxxBuildInfo a {
+.fittr-build-info a {
   color: #aaa !important;
 }
 
-.xxxBuildInfo a:hover {
+.fittr-build-info a:hover {
   color: #fff !important;
 }

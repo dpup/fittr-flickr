@@ -7,11 +7,11 @@
 */
 
 
-.xxxFakeLink {
+.fittr-fake-link {
   cursor: pointer;
 }
 
-.xxxDisabledLink, .xxxDisabledLink:hover {
+.fittr-disabled-link, .fittr-disabled-link:hover {
   text-decoration: none !important;
   color: #BBB !important;
   cursor: default !important;

@@ -52,7 +52,7 @@
         } else {
           el.href = '#';
           el.title = size + ' image not available';
-          el.className = 'xxxDisabledLink';
+          el.className = 'fittr-disabled-link';
         }
       }
     });

@@ -42,7 +42,7 @@
   
   function showHelp() {
     var div = createEl('div');
-    div.className = 'xxxDialog';
+    div.className = 'fittr-dialog';
     div.tabIndex = '0';
     document.body.appendChild(div);
     div.addEventListener('blur', function(e) {
@@ -51,20 +51,20 @@
     div.focus();
     
     var bg = createEl('div');
-    bg.className = 'xxxDialogBg';
+    bg.className = 'fittr-dialog-bg';
     div.appendChild(bg);
     
     var content = createEl('div');
-    content.className = 'xxxDialogContent';
+    content.className = 'fittr-dialog-content';
     div.appendChild(content);
     
     var title = createEl('div');
-    title.className = 'xxxTitle';
+    title.className = 'fittr-dialog-title';
     title.appendChild(createText('Keyboard Shortcut Help'));
     content.appendChild(title);
     
     var closeInfo = createEl('div');
-    closeInfo.className = 'xxxClose';
+    closeInfo.className = 'fittr-dialog-close';
     closeInfo.appendChild(createText('ESC to close'));
     title.appendChild(closeInfo);
     
@@ -72,13 +72,13 @@
       var el = createEl('div');
       el.className = 'xxxSection';
       var header = createEl('div');
-      header.className = 'xxxHeader';
+      header.className = 'fittr-dialog-header';
       header.appendChild(createText(SHORTCUTS[section]._title));
       el.appendChild(header);
       for (var key in SHORTCUTS[section]) {
         if (key.substr(0, 1) == '_') continue;
         var line = createEl('div');
-        line.className = 'xxxKey';
+        line.className = 'fittr-dialog-key';
         var bold = createEl('b');
         bold.appendChild(createText(key));
         line.appendChild(bold);
