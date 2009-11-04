@@ -54,7 +54,7 @@ function makeRequest(port, type, params) {
       var status = xhr.status;
       var response, err = '';
       try {
-        response = eval('(' + xhr.responseText + ')');
+        response = JSON.parse(xhr.responseText);
       } catch (e) {
         status = -1;
         err = e.message;

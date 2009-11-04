@@ -65,24 +65,35 @@ var exif = (function() {
       link.parentNode.parentNode.insertBefore(el, link.parentNode.nextSibling);
 
       api.makeApiRequest(api.RequestType.GET_EXIF, {photo_id: page.getPhotoId()}, function(data) {
+        el.innerHTML = '';
         if (data.status == 200 && data.content.stat == 'ok') {
-          var html = '<table class="fittr-exif-table">';
+          var table = createEl('table', 'fittr-exif-table');
           var seen = {};
           for (var i = 0; i < data.content.photo.exif.length; i++) {
             var item = data.content.photo.exif[i];
             if (item.tag in EXIF_TAG_WHITELIST && !(item.tag in seen)) {
               seen[item.tag] = 1;
               var value = item.clean ? item.clean._content : item.raw._content;
-              html += '<tr><td>' + item.label + '</td><td>' + value + '</td></tr>';
+              var tr = createEl('tr');
+              var td1 = createEl('td');
+              td1.appendChild(createText(item.label));
+              tr.appendChild(td1);
+              var td2 = createEl('td');
+              td2.appendChild(createText(value));
+              tr.appendChild(td2);
+              table.appendChild(tr);
             }
           }
-          html += '</table>';
-          el.innerHTML = html;
-        } else if (data.status == 200 && data.content.stat == 'fail') {
-          el.innerHTML = '<i>Error loading EXIF : ' + data.content.message + '</i>';
+          el.appendChild(table);
         } else {
-          el.innerHTML = '<i>Error loading EXIF.</i>';
-        }
+          var error = createEl('i');
+          if (data.status == 200 && data.content.stat == 'fail') {
+            error.appendChild(createText('Error loading EXIF : ' + data.content.message));
+          } else {
+            error.appendChild(createText('Error loading EXIF, status: ' + data.status));
+          }
+          el.appendChild(error);
+        }  
         el.style.height = el.scrollHeight + 'px';
       });
     }
