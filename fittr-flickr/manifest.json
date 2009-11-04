@@ -14,12 +14,13 @@
              "utils/re.js",
              
              "features/bighugelabs.js",
+             "features/build-info.js",
              "features/canonical-url.js",
              "features/easy-exif.js",
              "features/easy-links.js",
              "features/light-box.js",
              "features/nice-reply.js",
-             "features/build-info.js",
+             "features/tag-autocomplete.js",
              
              "features/keyboard.js"
             ],

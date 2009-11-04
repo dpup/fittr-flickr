@@ -69,6 +69,19 @@ Cache.prototype.get = function(type, params) {
   return null;
 };
 
+Cache.prototype.remove = function() {
+  var key = this.getHc_(type, params);
+  if (this.data_[key]) {
+    for (var i = 0; i < this.keys_.length; i++) {
+      if (this.keys_[i] == key) {
+        this.keys_.splice(i, 1);
+        break;
+      }
+    }
+    delete this.data_[key];
+  }
+};
+
 Cache.prototype.getHc_ = function(type, params) {
   return type + '__' + JSON.stringify(params);
 };

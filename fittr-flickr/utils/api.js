@@ -24,7 +24,8 @@ var api = {
   RequestType: {
     GET_EXIF: 'flickr.photos.getExif',
     GET_SIZES: 'flickr.photos.getSizes',
-    LOOKUP_USER: 'flickr.urls.lookupUser'
+    LOOKUP_USER: 'flickr.urls.lookupUser',
+    GET_USER_TAGS: 'flickr.tags.getListUserPopular',
   },
   
   makeApiRequest: function(requestType, data, callback){
@@ -50,7 +51,7 @@ var api = {
   },
   
   getImageSizes: function(id, callback){
-    api.makeApiRequest(api.RequestType.GET_SIZES, { photo_id: id}, function(data){
+    api.makeApiRequest(api.RequestType.GET_SIZES, {photo_id: id}, function(data){
       if (data.status == 200 && data.content.stat == 'ok') {
         callback(data.content.sizes.size);
       } else {
@@ -59,5 +60,29 @@ var api = {
         callback(null);
       }
     });
+  },
+  
+  getUserTags: function(user, callback) {
+    api.makeApiRequest(api.RequestType.GET_USER_TAGS,
+        {user_id: user, count: 500, force: 1, nocache: 1}, function(data){
+      if (data.status == 200 && data.content.stat == 'ok') {
+        var rawTags = data.content.who.tags.tag;
+        rawTags.sort(function(a, b) {
+          return Number(a.count) < Number(b.count) ? 1 :
+                 Number(a.count) > Number(b.count) ? -1 :
+                 a._content > b._content ? 1 :
+                 a._content < b._content ? -1 : 0;
+        });
+        var tags = [];
+        for (var i = 0; i < rawTags.length; i++) {
+          tags.push(rawTags[i]._content);
+        }
+        callback(tags);
+      } else {
+        console.log('Can not get tag list');
+        console.log(data);
+        callback(null);
+      }
+    });    
   }
 };
