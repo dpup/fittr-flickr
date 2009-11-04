@@ -34,13 +34,10 @@
             ]
     }
   ],
-  "page_actions": [
-    {
-      "id": "gotopage",
-      "name": "Go to Flickr photo page.",
-      "icons": ["img/favicon.ico"]
-    }
-  ],
+  "page_action": {
+    "default_title": "Go to Flickr photo page.",
+    "default_icon": "img/favicon.ico"
+  },
   "background_page": "api_relay.html",
   "update_url": "http://fittr.googlecode.com/svn/trunk/updates.xml",
   "permissions": [
