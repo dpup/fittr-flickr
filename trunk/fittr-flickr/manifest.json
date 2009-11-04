@@ -26,6 +26,7 @@
             ],
       "css": ["css/common.css",
               "css/build-info.css",
+              "css/canonical-url.css",
               "css/dialog.css",
               "css/exif.css",
               "css/fix-the-logo.css",

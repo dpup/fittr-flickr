@@ -1,0 +1,17 @@
+.fitter-shorturl-input {
+  border: 0;
+  padding: 0;
+  color: #3886E6;
+  font-size: 11px;
+  margin-left: -2px;
+  width: 105px;
+  cursor: pointer;
+}
+
+.fitter-shorturl-input:hover {
+  outline: 1px dotted #999;
+}
+
+.fitter-shorturl-input:focus {
+  outline: 1px dotted #999;
+}
