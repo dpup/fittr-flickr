@@ -96,15 +96,15 @@ function checkTabForFlickrImg(tab) {
     var url = info.url;
     if (url && re.PHOTO_URL.test(url)) {
       console.log('Found flickr Img URL: ' + url);
-      chrome.pageActions.enableForTab('gotopage', {
-        tabId: tab,
-        url: url
-      });
+      chrome.pageAction.show(tab);
     }
   });
 }
 
-chrome.pageActions['gotopage'].addListener(function(pageActionId, info) {
+chrome.pageAction.onClicked.addListener(function(a, b) {
+  // NOTE: docs say first arg is 'tab'.  Old API had tabinfo as 2nd arg.  This can probably be
+  // fixed after the beta release of extensions.
+  var info = a || b;
   var m = re.PHOTO_URL.exec(info.tabUrl);
   if (m) {
     chrome.tabs.update(info.tabId,
