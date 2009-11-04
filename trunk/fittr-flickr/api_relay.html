@@ -34,7 +34,8 @@ var dataCache = new Cache;
 function onPortConnect(port) {
   var type = port.name.split('_')[0];
   var listener = function(params, port) {
-    var cachedValue = dataCache.get(type, params);
+    var cachedValue;
+    if (!params.force) cachedValue = dataCache.get(type, params);
     if (cachedValue) {
       console.log('Data available in local cache ' + type);
       port.postMessage(cachedValue);
@@ -63,7 +64,7 @@ function makeRequest(port, type, params) {
         content: response,
         error: err
       };
-      if (status == 200) dataCache.put(type, params, responseObject);
+      if (status == 200 && !params.nocache) dataCache.put(type, params, responseObject);
       port.postMessage(responseObject);
     }
   };
