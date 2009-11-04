@@ -47,12 +47,15 @@
       var li = createEl('li');
       li.className = 'Stats';
       
-      var a1 = createEl('a');
-      a1.href = shortUrl;
-      a1.className = 'Plain';
-      a1.appendChild(createText('Short URL'));
-      li.appendChild(a1);
-      
+      var input = createEl('input', 'fitter-shorturl-input');
+      input.type = 'text';
+      input.setAttribute('spellcheck', 'false');
+      input.value = shortUrl;
+      input.title = 'Click to select, then use Ctrl-C to copy';
+      input.addEventListener('click', function(e) {
+        e.target.select();
+      });
+      li.appendChild(input);
       li.appendChild(createText(' ('));
       
       var a2 = createEl('a');
