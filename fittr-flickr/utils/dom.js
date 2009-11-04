@@ -22,8 +22,10 @@ function createText(txt) {
   return document.createTextNode(txt); 
 }
 
-function createEl(el) {
-  return document.createElement(el); 
+function createEl(el, opt_className) {
+  var el = document.createElement(el); 
+  if (opt_className) el.className = opt_className;
+  return el;
 }
 
 function getEl(id) {
