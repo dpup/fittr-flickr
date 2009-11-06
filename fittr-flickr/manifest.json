@@ -11,6 +11,7 @@
              "utils/cache.js",
              "utils/dom.js",
              "utils/page.js",
+             "utils/prefs.js",
              "utils/re.js",
              
              "features/bighugelabs.js",

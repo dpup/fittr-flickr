@@ -21,6 +21,7 @@
 var lightbox = (function() {
   var imageInfo;
   var overImage = false;
+  var backgroundClassName;
   var photoId = page.getPhotoId();
   if (photoId) {
     var thePhoto = query('.photoImgDiv img')[0];
@@ -58,6 +59,10 @@ var lightbox = (function() {
     thePhoto.addEventListener('click', openLightBox);
     dragProxy.addEventListener('click', openLightBox);
     magnifyEl.addEventListener('click', openLightBox);
+    
+    prefs.get('lightbox-class', function(value) {
+      backgroundClassName = value || 'fittr-lightbox-bg';
+    });
   }
   
   function mouseOver(e) {
@@ -84,6 +89,9 @@ var lightbox = (function() {
   
   var activeLightBox = false;
   function showLightBox(src, h, w) {
+    h = Number(h);
+    w = Number(w);
+    
     if (activeLightBox) {
       closeLightBox();
       return;
@@ -92,12 +100,15 @@ var lightbox = (function() {
     closeLightBox = function() {
       document.body.removeChild(div);
       document.body.removeChild(bg);
-      activeLightBox = false;
+      document.body.removeChild(ctrl);
       closeLightBox = function() {};
+      activeLightBox = false;
     };
 
-    var maxH = document.body.clientHeight - 20;
-    var maxW = document.body.clientWidth - 20;
+    var sH = document.body.clientHeight;
+    var sW = document.body.clientWidth;
+    var maxH = sH - 20;
+    var maxW = sW - 70;
     if (h > maxH) {
       var dh = h / maxH;
       h = maxH;
@@ -109,23 +120,24 @@ var lightbox = (function() {
       h = h / dw;
     }
     
-    var div = createEl('div');
-    div.className = 'fittr-lightbox';
+    var y = Math.round(sH / 2 - h / 2);
+    var x = Math.round(sW / 2 - w / 2);
+    
+    var div = createEl('div', 'fittr-lightbox');
     div.tabIndex = '0';
     
     div.style.width = w + 'px';
     div.style.height = h + 'px';
-    div.style.marginTop = '-' + Math.round(h / 2) + 'px';
-    div.style.marginLeft = '-' + Math.round(w / 2) + 'px';
+    div.style.top = y + 'px';
+    div.style.left = x + 'px';
     div.style.backgroundImage = 'url(' + chrome.extension.getURL('img/boxes.png') + ')';
     
     document.body.appendChild(div);
 
     div.focus();
     activeLightBox = true;
-    
-    var bg = createEl('div');
-    bg.className = 'fittr-lightbox-bg';
+
+    var bg = createEl('div', backgroundClassName);
     bg.addEventListener('click', closeLightBox);
     document.body.appendChild(bg);
     
@@ -135,7 +147,39 @@ var lightbox = (function() {
     img.width = w;
     img.addEventListener('click', closeLightBox);
     div.appendChild(img);
+
+    var ctrl = createEl('div', 'fittr-lightbox-cpanel');
     
+    var dark = createEl('div', 'fittr-lightbox-control fittr-lightbox-black');
+    dark.title = 'Dark';
+    dark.lightBoxClass = 'fittr-lightbox-bg-dark';
+    
+    var grey = createEl('div', 'fittr-lightbox-control fittr-lightbox-grey');
+    grey.title = 'Mid grey';
+    grey.lightBoxClass = '';
+    
+    var white = createEl('div', 'fittr-lightbox-control fittr-lightbox-white');
+    white.title = 'White';
+    white.lightBoxClass = 'fittr-lightbox-bg-white';
+    
+    ctrl.addEventListener('click', function(e) {
+      var extraClass = e.target.lightBoxClass;
+      if (extraClass != undefined) {
+        bg.className = 'fittr-lightbox-bg ' + extraClass;
+      }
+      // Saving the class rather than state is clunky but meh.
+      backgroundClassName = bg.className;
+      prefs.set('lightbox-class', backgroundClassName, function() {});
+    });
+    
+    ctrl.appendChild(dark);
+    ctrl.appendChild(grey);
+    ctrl.appendChild(white);
+    
+    document.body.appendChild(ctrl);
+    
+    ctrl.style.top = (y + h - ctrl.offsetHeight) + 'px';
+    ctrl.style.left = (x + w + 10 ) + 'px';
   }
   
   function showMaxButton() {
