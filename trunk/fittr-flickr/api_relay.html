@@ -34,13 +34,23 @@ var dataCache = new Cache;
 function onPortConnect(port) {
   var type = port.name.split('_')[0];
   var listener = function(params, port) {
-    var cachedValue;
-    if (!params.force) cachedValue = dataCache.get(type, params);
-    if (cachedValue) {
-      console.log('Data available in local cache ' + type);
-      port.postMessage(cachedValue);
+    if (type == 'setPref') {
+      localStorage[params.name] = params.value;
+      port.postMessage(params.value);
+    
+    } else if (type == 'getPref') {
+      port.postMessage(localStorage[params.name]);
+    
     } else {
-      makeRequest(port, type, params);
+      var cachedValue;
+      if (!params.force) 
+        cachedValue = dataCache.get(type, params);
+      if (cachedValue) {
+        console.log('Data available in local cache ' + type);
+        port.postMessage(cachedValue);
+      } else {
+        makeRequest(port, type, params);
+      }
     }
     port.onMessage.removeListener(listener);
   };  

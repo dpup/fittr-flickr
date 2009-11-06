@@ -16,14 +16,50 @@
 
 .fittr-lightbox {
   position: fixed;
-  z-index: 10000;
-  top: 50%;
-  left: 50%;
+  z-index: 15001;
   background-color: #999;
   outline: 0;
   text-align: left;
   z-index: 15001;
-  -webkit-box-shadow: 0 0 20px #333;
+  -webkit-box-shadow: 0 0 10px #000;
+}
+
+.fittr-lightbox-cpanel {
+  position: fixed;
+  z-index: 15001;
+  top: 10px;
+  left: 10px;
+  opacity: 0.50;
+  -webkit-transition: opacity 0.35s ease-out;
+}
+
+.fittr-lightbox-cpanel:hover {
+  opacity: 1;
+}
+
+.fittr-lightbox-control {
+  width: 11px;
+  height: 11px;
+  margin: 3px;
+  border: 1px solid #000;
+  -webkit-box-shadow: 0 0 10px #000;
+  cursor: hand;
+}
+
+.fittr-lightbox-control:hover {
+  border-color: #0063DC;
+}
+
+.fittr-lightbox-black {
+  background-color: #000;
+}
+
+.fittr-lightbox-grey {
+  background-color: #999;
+}
+
+.fittr-lightbox-white {
+  background-color: #fff;
 }
 
 .fittr-lightbox-bg {
@@ -33,8 +69,17 @@
   width: 100%;
   height: 100%;
   background-color: #000;
-  opacity: 0.3;
+  opacity: 0.6;
   z-index: 15000;
+}
+
+.fittr-lightbox-bg-dark {
+  opacity: 0.9;
+}
+
+.fittr-lightbox-bg-white {
+  background-color: #fff;
+  opacity: 0.8;
 }
 
 .fittr-lightbox img {
