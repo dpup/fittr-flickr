@@ -5,11 +5,13 @@
 
 
 .fittr-magnify-icon {
-  position: absolute;
+  position: relative;
   z-index: 10000;
-  right: 2px;
-  top: 0px;
   display: none;
+}
+
+.fittr-magnify-icon img {
+  position: absolute;
   cursor: pointer;
 }
 
