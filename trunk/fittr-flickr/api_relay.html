@@ -111,13 +111,10 @@ function checkTabForFlickrImg(tab) {
   });
 }
 
-chrome.pageAction.onClicked.addListener(function(a, b) {
-  // NOTE: docs say first arg is 'tab'.  Old API had tabinfo as 2nd arg.  This can probably be
-  // fixed after the beta release of extensions.
-  var info = a || b;
-  var m = re.PHOTO_URL.exec(info.tabUrl);
+chrome.pageAction.onClicked.addListener(function(tab) {
+  var m = re.PHOTO_URL.exec(tab.url);
   if (m) {
-    chrome.tabs.update(info.tabId,
+    chrome.tabs.update(tab.id,
         {url: 'http://www.flickr.com/photo.gne?id=' + m[1]});
   }
 });
