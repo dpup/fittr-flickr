@@ -4,14 +4,16 @@
   color: #3886E6;
   font-size: 11px;
   margin-left: -2px;
-  width: 105px;
+  width: 115px;
   cursor: pointer;
+  border-bottom: 1px dotted #f0f0f0;
 }
 
 .fitter-shorturl-input:hover {
-  outline: 1px dotted #999;
+  border-bottom: 1px dotted #3886E6;
 }
 
-.fitter-shorturl-input:focus {
-  outline: 1px dotted #999;
+.fitter-shorturl-input:active {
+  background-color: #3886E6;
+  color: #fff;
 }
