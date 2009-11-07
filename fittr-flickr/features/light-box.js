@@ -24,7 +24,8 @@ var lightbox = (function() {
   var backgroundClassName;
   var photoId = page.getPhotoId();
   if (photoId) {
-    var thePhoto = query('.photoImgDiv img')[0];
+    var thePhoto = query('.photoImgDiv img[src="http://l.yimg.com/g/images/spaceball.gif"]')[0] ||
+                   query('.photoImgDiv img')[0];
     var dragProxy = getEl('photo-drag-proxy');
     var magnifyEl = createMagnify();
     
@@ -195,14 +196,25 @@ var lightbox = (function() {
     img.src = chrome.extension.getURL('img/magnify.png');
     img.width = '19';
     img.height = '19';
-    img.className = 'fittr-magnify-icon';
     img.title = 'Clicking the image when this icon is showing will open ' +
                 'a large copy in a light-box';
-    img.style.left = (thePhoto.offsetWidth - 19) + 'px';
-    img.style.top = (thePhoto.offsetHeight - 19) + 'px';
-    thePhoto.parentNode.style.position = 'relative';
-    thePhoto.parentNode.appendChild(img);
-    return img;  
+    var div = createEl('div', 'fittr-magnify-icon');
+    if (thePhoto.src.indexOf('spaceball.gif') == -1) {
+      thePhoto.parentNode.style.position = 'relative';
+      div.style.position = 'absolute';
+      div.style.width = div.style.height = '19px';
+      div.style.left = (thePhoto.offsetWidth - 19) + 'px';
+      div.style.top = (thePhoto.offsetHeight - 19) + 'px';
+    } else {
+      div.style.position = 'relative';
+      div.style.top = div.style.marginTop = -thePhoto.offsetHeight + 2 + 'px';
+      div.style.width = thePhoto.offsetWidth + 'px';
+      img.style.left = (thePhoto.offsetWidth - 19) + 'px';
+      img.style.top = (thePhoto.offsetHeight - 19) + 'px';
+    }
+    div.appendChild(img);
+    thePhoto.parentNode.appendChild(div);
+    return div;
   }
   
   // Return the public lightbox object.
