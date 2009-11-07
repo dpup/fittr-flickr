@@ -36,12 +36,6 @@
 
   var id = page.getPhotoId();
   if (id) {
-    var shortUrl = 'http://flic.kr/p/' + base58Encode(id);
-    
-    var title = document.title.split(' on Flickr - Photo Sharing!')[0];
-    var tweet = '"' + title + '" - ' + shortUrl;
-    var twitterUrl = 'http://twitter.com/?status=' + encodeURIComponent(tweet);
-    
     var el = getEl('li_geo_block');
     if (el) {
       var li = createEl('li');
@@ -50,22 +44,14 @@
       var input = createEl('input', 'fitter-shorturl-input');
       input.type = 'text';
       input.setAttribute('spellcheck', 'false');
-      input.value = shortUrl;
-      input.title = 'Click to select, then use Ctrl-C to copy';
+      input.value = 'http://flic.kr/p/' + base58Encode(id);
+      input.title = 'Click to copy short URL to the clipboard';
       input.addEventListener('click', function(e) {
-        e.target.select();
+        input.select();
+        document.execCommand('Copy');
+        input.blur();
       });
       li.appendChild(input);
-      li.appendChild(createText(' ('));
-      
-      var a2 = createEl('a');
-      a2.href = twitterUrl;
-      a2.className = 'Plain';
-      a2.target = '_blank';
-      a2.appendChild(createText('tweet'));
-      
-      li.appendChild(a2);
-      li.appendChild(createText(')'));
       
       el.parentNode.insertBefore(li, el.parentNode.firstChild);
     }
