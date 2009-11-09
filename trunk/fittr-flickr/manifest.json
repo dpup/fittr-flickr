@@ -40,6 +40,8 @@
     "default_icon": "img/favicon.ico"
   },
   "background_page": "api_relay.html",
+  "options_page": "options.html",
+  "icons": { "128": "img/logo.128.png", "32": "img/logo.32.png" },
   "update_url": "http://fittr.googlecode.com/svn/trunk/updates.xml",
   "permissions": [
     "tabs",
