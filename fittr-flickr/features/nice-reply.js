@@ -36,9 +36,12 @@
     var link = createEl('a');
     link.href = '#message';
     link.className = 'Plain';  
-    link.img = img;
-    link.who = who;
+    link.setAttribute('img', img);
+    link.setAttribute('who', who);
     link.appendChild(createText('reply'));
+  
+    console.log(img, who);
+    
   
     // Find the small links and insert the reply.
     var el = comments[i].querySelector('small a[class=Plain]').parentNode;
@@ -48,9 +51,10 @@
   
     // When user clicks on reply link add nice HTML to the input box.
     link.addEventListener('click', function(e) {
+      console.log(e.target);
       var prefix = inp.value ? '\n' : '';
-      inp.value = inp.value + prefix + '<img src="' + e.target.img +
-          '" width="16" height="16"> &nbsp; <b>' + e.target.who + '</b>: '; 
+      inp.value = inp.value + prefix + '<img src="' + e.target.getAttribute('img') +
+          '" width="16" height="16"> &nbsp; <b>' + e.target.getAttribute('who') + '</b>: '; 
       inp.focus();
       inp.selectionStart = inp.value.length;
     });  
