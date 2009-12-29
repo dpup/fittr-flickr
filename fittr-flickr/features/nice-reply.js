@@ -40,9 +40,6 @@
     link.setAttribute('who', who);
     link.appendChild(createText('reply'));
   
-    console.log(img, who);
-    
-  
     // Find the small links and insert the reply.
     var el = comments[i].querySelector('small a[class=Plain]').parentNode;
     el.insertBefore(createText(' | '), el.lastChild);
@@ -51,7 +48,6 @@
   
     // When user clicks on reply link add nice HTML to the input box.
     link.addEventListener('click', function(e) {
-      console.log(e.target);
       var prefix = inp.value ? '\n' : '';
       inp.value = inp.value + prefix + '<img src="' + e.target.getAttribute('img') +
           '" width="16" height="16"> &nbsp; <b>' + e.target.getAttribute('who') + '</b>: '; 

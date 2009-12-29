@@ -199,19 +199,11 @@ var lightbox = (function() {
     img.title = 'Clicking the image when this icon is showing will open ' +
                 'a large copy in a light-box';
     var div = createEl('div', 'fittr-magnify-icon');
-    if (thePhoto.src.indexOf('spaceball.gif') == -1) {
-      thePhoto.parentNode.style.position = 'relative';
-      div.style.position = 'absolute';
-      div.style.width = div.style.height = '19px';
-      div.style.left = (thePhoto.offsetWidth - 19) + 'px';
-      div.style.top = (thePhoto.offsetHeight - 19) + 'px';
-    } else {
-      div.style.position = 'relative';
-      div.style.top = div.style.marginTop = -thePhoto.offsetHeight + 2 + 'px';
-      div.style.width = thePhoto.offsetWidth + 'px';
-      img.style.left = (thePhoto.offsetWidth - 19) + 'px';
-      img.style.top = (thePhoto.offsetHeight - 19) + 'px';
-    }
+    thePhoto.parentNode.style.position = 'relative';
+    div.style.position = 'absolute';
+    div.style.width = div.style.height = '19px';
+    div.style.left = (thePhoto.offsetWidth - 19) + 'px';
+    div.style.top = (thePhoto.offsetHeight - 19) + 'px';
     div.appendChild(img);
     thePhoto.parentNode.appendChild(div);
     return div;
