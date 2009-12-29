@@ -1,6 +1,6 @@
 {
   "name": "Fittr Flickr",
-  "version": "1.4.2",
+  "version": "1.4.3",
   "description": "Making Flickr more fitter.",
   "content_scripts": [
     {
@@ -42,7 +42,7 @@
   "background_page": "api_relay.html",
   "options_page": "options.html",
   "icons": { "128": "img/logo.128.png", "32": "img/logo.32.png" },
-  "update_url": "http://clients2.google.com/service/update2/crx",
+  "update_url": "http://fittr.googlecode.com/svn/trunk/updates.xml",
   "permissions": [
     "tabs",
     "http://api.flickr.com/*"
