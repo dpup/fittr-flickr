@@ -21,18 +21,42 @@
 
 (function() {
   // Global elements.
-  var inp = getEl('message');
+  var inp = getEl('message') || query('form textarea')[0];
   
   // Go through all the comment blocks.
   var comments = query('div.comment-block');
   for (var i = 0; i < comments.length; i++) {
-    var img = comments[i].querySelector('div.Who img').src;
+    var img = comments[i].querySelector('div.Who img');
     var whoLink = comments[i].querySelector('h4 a');
-    if (!whoLink) continue;
+    if (!img || !whoLink) continue;
     
     var who = whoLink.textContent.split(' ')[0];
+    var insertAfter = comments[i].querySelector('small a[class=Plain]');
+    
+    createReplyLink(who, img.src, insertAfter);
+  }
   
-    // Create the reply link.
+  // Look for group posts and replies.
+  var rows = query('#DiscussTopic tr');
+  for (var i = 0; i < rows.length; i++) {
+    var img = rows[i].querySelector('td.Who img');
+    var whoLinks = rows[i].querySelectorAll('td.Said h4 a');
+    if (!img || whoLinks.length == 0) continue;
+    
+    var who;
+    for (var j = 0; j < whoLinks.length; j++) {
+      if (whoLinks[j].textContent != '') {
+        who = whoLinks[j].textContent.split(' ')[0];
+        break;
+      }
+    }
+    
+    var insertAfter = rows[i].querySelector('td.Said small a[class=Plain]');
+    
+    createReplyLink(who, img.src, insertAfter);
+  }
+  
+  function createReplyLink(who, img, el) {
     var link = createEl('a');
     link.href = '#message';
     link.className = 'Plain';  
@@ -41,10 +65,11 @@
     link.appendChild(createText('reply'));
   
     // Find the small links and insert the reply.
-    var el = comments[i].querySelector('small a[class=Plain]').parentNode;
-    el.insertBefore(createText(' | '), el.lastChild);
-    el.insertBefore(link, el.lastChild);
-    el.insertBefore(createText(' '), el.lastChild);
+    var parent = el.parentNode;
+    var sibling = el.nextSibling;
+    parent.insertBefore(createText(' | '), sibling);
+    parent.insertBefore(link, sibling);
+    parent.insertBefore(createText(' '), sibling);
   
     // When user clicks on reply link add nice HTML to the input box.
     link.addEventListener('click', function(e) {
