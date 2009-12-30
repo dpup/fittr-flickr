@@ -73,9 +73,25 @@
   
     // When user clicks on reply link add nice HTML to the input box.
     link.addEventListener('click', function(e) {
+      var tmpDiv = document.createElement();
+      tmpDiv.appendChild(window.getSelection().getRangeAt(0).cloneContents());
+      
+      var selection = tmpDiv.innerHTML;
+
       var prefix = inp.value ? '\n' : '';
-      inp.value = inp.value + prefix + '<img src="' + e.target.getAttribute('img') +
-          '" width="16" height="16"> &nbsp; <b>' + e.target.getAttribute('who') + '</b>: '; 
+      var imageHtml = '<img src="' + e.target.getAttribute('img') +
+          '" width="16" height="16"> &nbsp;';
+      var nameHtml = '<b>' + e.target.getAttribute('who') + '</b>';
+
+      var content;
+      if (selection) {
+        content = prefix + '<blockquote>' + imageHtml + nameHtml + ' said:\n<i>' +
+            selection + '</i></blockquote> ';
+      } else {
+        content = prefix + imageHtml + nameHtml + ': ';
+      }
+
+      inp.value = inp.value + content; 
       inp.focus();
       inp.selectionStart = inp.value.length;
     });  
