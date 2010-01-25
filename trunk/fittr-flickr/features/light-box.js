@@ -23,9 +23,9 @@ var lightbox = (function() {
   var overImage = false;
   var backgroundClassName;
   var photoId = page.getPhotoId();
-  if (photoId) {
-    var thePhoto = query('.photoImgDiv img[src="http://l.yimg.com/g/images/spaceball.gif"]')[0] ||
-                   query('.photoImgDiv img')[0];
+  var thePhoto = query('.photoImgDiv img[src="http://l.yimg.com/g/images/spaceball.gif"]')[0] ||
+                 query('.photoImgDiv img')[0];
+  if (photoId && thePhoto) {
     var dragProxy = getEl('photo-drag-proxy');
     var magnifyEl = createMagnify();
     

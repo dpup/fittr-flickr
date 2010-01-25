@@ -34,7 +34,7 @@
       ',': {title: 'Go to the previous photo', fn: goPrevious},
       'U': {title: 'Go up to the photostream/pool/set', fn: goUp},
       'S': {title: 'Star (Add to favorites)', fn: star},
-      'X': {title: 'Toggle EXIF preview', fn: exif.toggle},
+      'X': {title: 'Toggle EXIF preview', fn: function() { if (exif) exif.toggle(); }},
       'L': {title: 'Open photo in Lightbox', fn: lightbox.open}
     }
   };
