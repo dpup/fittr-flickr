@@ -73,10 +73,12 @@
   
     // When user clicks on reply link add nice HTML to the input box.
     link.addEventListener('click', function(e) {
-      var tmpDiv = document.createElement();
-      tmpDiv.appendChild(window.getSelection().getRangeAt(0).cloneContents());
-      
-      var selection = tmpDiv.innerHTML;
+      var selection = '';
+      if (window.getSelection().rangeCount) {
+        var tmpDiv = document.createElement();
+        tmpDiv.appendChild(window.getSelection().getRangeAt(0).cloneContents());
+        selection = tmpDiv.innerHTML;
+      }      
 
       var prefix = inp.value ? '\n' : '';
       var imageHtml = '<img src="' + e.target.getAttribute('img') +
