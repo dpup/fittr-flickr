@@ -77,8 +77,8 @@
       if (window.getSelection().rangeCount) {
         var tmpDiv = document.createElement();
         tmpDiv.appendChild(window.getSelection().getRangeAt(0).cloneContents());
-        selection = tmpDiv.innerHTML;
-      }      
+        selection = tmpDiv.innerHTML.replace(/^[\s\xa0]+|[\s\xa0]+$/g, '');
+      }
 
       var prefix = inp.value ? '\n' : '';
       var imageHtml = '<img src="' + e.target.getAttribute('img') +
@@ -87,8 +87,8 @@
 
       var content;
       if (selection) {
-        content = prefix + '<blockquote>' + imageHtml + nameHtml + ' said:\n<i>' +
-            selection + '</i></blockquote> ';
+        content = prefix + '<i>' + imageHtml + nameHtml + ':  ' +
+            selection + '</i>\n';
       } else {
         content = prefix + imageHtml + nameHtml + ': ';
       }
