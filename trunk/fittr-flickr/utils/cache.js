@@ -41,7 +41,7 @@ function Cache() {
   }, 60 * 1000);
 }
 
-Cache.MAX_SIZE = 25;
+Cache.MAX_SIZE = 50;
 Cache.MAX_LIFETIME = 20 * 60 * 1000;
 
 Cache.prototype.put = function(type, params, response) {
