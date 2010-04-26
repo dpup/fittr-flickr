@@ -19,15 +19,6 @@
   cursor: pointer;
 }
 
-.fittr-exif-section td {
-  padding: 5px !important;
-  letter-spacing: 4px;
-  border-bottom: 1px solid #AAA; 
-  border-top: 1px solid #AAA; 
-  cursor: hand; 
-  text-transform: uppercase;
-}
-
 .fittr-exif-row td {
   border-bottom: 1px dotted #AAA;
   background-color: #FCFCFC;
@@ -35,6 +26,7 @@
 
 .fittr-exif-table {
   border-bottom: 1px solid #AAA;
+  border-top: 1px dotted #AAA;
   width: 100%;
   border-collapse: collapse;
 }
@@ -44,4 +36,14 @@
   color: #999;
   padding: 3px;
   width: 50%;
+}
+
+.fittr-exif-section td {
+  padding: 5px !important;
+  letter-spacing: 4px;
+  border-bottom: 1px solid #AAA; 
+  border-top: 1px solid #AAA; 
+  cursor: hand; 
+  text-transform: uppercase;
+  font-size: 6pt !important;
 }
