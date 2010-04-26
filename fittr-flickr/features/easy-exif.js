@@ -22,39 +22,17 @@
 var exif = (function() {
   
   var EXIF_TAG_WHITELIST = {
-    FileSize: 1,
-    FileType: 1,
-    ImageWidth: 1,
-    ImageHeight: 1,
-    EncodingProcess: 1,
-    BitsPerSample: 1,
-    ColorComponents: 1,
-    XResolution: 1,
-    YResolution: 1,
-    ResolutionUnit: 1,
     Model: 1,    
     Lens: 1,
     MeteringMode: 1,
-    Flash: 1,
-    ExposureMode: 1,
-    WhiteBalance: 1,
-    SceneCaptureType: 1,
-    DeviceModel: 1,
-    CreatorTool: 1 ,
-    
     ExposureProgram: 1,
-    DateTimeOriginal: 1,
-    ColorTransform: 1,
-
-    ExposureTime: 1,
-    FNumber: 1,
-    ISO: 1,
-    ExposureCompensation: 1,
-    FocalLength: 1
+    Flash: 1
   };
   
   var link;
   var exifData = {};
+  var specialData = {};
+  
   if (page.getPhotoId()) {
     link = addPhotoLink('+ ', 'Show/hide additional exif data fields');
     if (!link) return;
@@ -82,6 +60,22 @@ var exif = (function() {
     else return {label: '', value: ''};
   }
   
+  function getExifRow(tag, label, value, sectionId) {
+    var tr = createEl('tr');
+    tr.className = 'fittr-exif-row ' + sectionId;
+    tr.style.display = 'none';
+    var td1 = createEl('td');
+    td1.appendChild(createText(label));  //  + ' (' + tag + ')')
+    tr.appendChild(td1);
+    var td2 = createEl('td');
+    // Bit of a hack to make sure the long Digest fields don't cause the whole page
+    // to get super wide.  If other fields can be this long without any breaking spaces
+    // then we should instead insert <wbr> tags.
+    td2.appendChild(createText(value.replace(/([^\s]),([^\s])/g, '$1, $2')));
+    tr.appendChild(td2);
+    return tr;
+  }
+  
   function getExifEl() {
     var el = getEl('fittr-exif-display');
     if (!el) {
@@ -105,11 +99,25 @@ var exif = (function() {
               label: item.label,
               value: value
             };
+            
+            if (EXIF_TAG_WHITELIST[item.tag] && !specialData[item.tag]) {
+              specialData[item.tag] = exifData[item.tagspace][item.tag];
+            }
           }
           
           // Create the big exif table.
           var table = createEl('table', 'fittr-exif-table');
           el.appendChild(table);
+          
+          for (var tag in EXIF_TAG_WHITELIST) {
+            if (specialData[tag]) {
+              var label = specialData[tag].label || tag;
+              var value = specialData[tag].value || '';
+              var row = getExifRow(tag, label, value, '');
+              row.style.display = '';
+              table.appendChild(row);
+            }
+          }
           
           for (var section in exifData) {
             var sectionId = 'fittr-exif-section-' + section;
@@ -135,19 +143,7 @@ var exif = (function() {
             for (var tag in exifData[section]) {
               var label = exifData[section][tag].label;
               var value = exifData[section][tag].value || '';
-              var tr = createEl('tr');
-              tr.className = 'fittr-exif-row ' + sectionId;
-              tr.style.display = 'none';
-              var td1 = createEl('td');
-              td1.appendChild(createText(label + ' (' + tag + ')'));
-              tr.appendChild(td1);
-              var td2 = createEl('td');
-              // Bit of a hack to make sure the long Digest fields don't cause the whole page
-              // to get super wide.  If other fields can be this long without any breaking spaces
-              // then we should instead insert <wbr> tags.
-              td2.appendChild(createText(value.replace(/([^\s]),([^\s])/g, '$1, $2')));
-              tr.appendChild(td2);
-              table.appendChild(tr);
+              table.appendChild(getExifRow(tag, label, value, sectionId));
             }
           }
           
