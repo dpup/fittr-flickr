@@ -1,14 +1,148 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Fittr Flickr Preferences</title>
+<title>Fittr Flickr</title>
+<style>
+
+body {
+  margin: 10px;
+  min-width: 47em;
+}
+
+h1 {
+  font: bold 21px arial;
+  padding: 0;
+  margin: 0;
+  padding-top: 20px;
+  margin-bottom: 34px;
+}
+
+h1 img {
+  float: left;
+  margin-top: -18px;
+  margin-right: 12px;
+}
+
+.section-header {
+  background: #ebeff9;
+  border-top: 1px solid #b5c7de;
+  font: bold 13px arial;
+  padding-bottom: 2px;
+  padding-left: 5px;
+  padding-top: 3px;
+  width: auto;
+}
+
+.section-sub-header {
+  background: #f4f6fc;
+  border-bottom: 1px solid #edeff5;
+  font: normal 13px arial;
+  padding-bottom: 6px;
+  padding-left: 20px;
+  padding-top: 8px;
+  width: auto;
+}
+
+.section {
+  font: normal 13px arial;
+  padding: 20px 0 20px 15px;
+  width: 50%;
+}
+
+.fakelink, a, a:visited {
+  color: #00f;
+  cursor: pointer;
+}
+
+.fakelink:hover, a:hover {
+  color: #f00;
+}
+
+.info {
+  font-style: italic;
+  background-color: lightyellow;
+  padding: 5px;
+  border-left: 1px solid #999;
+  margin: 10px 0;
+}
+
+.reset {
+  text-align: right;
+  font-size: 11px;
+  margin: 0;
+}
+
+textarea {
+  width: 100%;
+}
+
+ul {
+  margin-top: 0;
+}
+
+
+</style>
 </head>
 <body>
+<script src="utils/fittr.js"></script>
+
+<h1><img src="img/logo.128.png" width="64" height="64"> Fittr Flickr</h1>
+
+<!--
+<div class="section-header">Custom keyboard shortcuts</div>
+<div class="section-sub-header">Change the keybindings for the various <i>Fittr Flickr</i> features.
+Remember, you can always press '?' while on a Flickr page to get a reminder of what they are.</div>
+<div class="content"></div>
+-->
+
+<div class="section-header">EXIF Settings</div>
+<div class="section">
+  <div>Enter the EXIF tags you wish to be displayed at the top of the EXIF expando.<br>
+  (one per line)</div>
+  <div><textarea id="exif" rows="10" cols="50" spellchecker="off"></textarea></div>
+  <div class="reset"><span class="fakelink" id="resetExif">Reset</span></div>
+
+  <div class="info">Cameras and software define various different EXIF fields.  To find the
+  <b>tag names</b> you'd like to display, find a sample image and mouse over the rows in
+  the EXIF table.</div>
+</div>
+
+<div class="section-header">Links</div>
+<div class="section">
+  <ul>
+    <li><a href="http://www.flickr.com">Flickr</a></li>
+    <li><a href="http://www.flickr.com/services/apps/72157622559583754/">App Garden</a></li>
+    <li><a href="https://chrome.google.com/extensions/detail/fhaledancjhefginmkkondfjpnkhdglh">Official extension page</a></li>
+    <li><a href="http://code.google.com/p/fittr/">Project page on Google Code</a></li>
+    <li><a href="http://code.google.com/p/fittr/issues/entry?template=Feature%20request">File a feature request</a></li>
+    <li><a href="http://www.flickr.com/dpup">My photostream</a></li>
+    <li><a href="http://code.google.com/p/fittr/wiki/About">About</a></li>
+  </ul>
+</div>
+
 <script>
 
+  var exifField = document.getElementById('exif');
+  exifField.value = localStorage['exif_fields'] || fittr.DEFAULT_EXIF;
+  exifField.addEventListener('change', saveExif);
+
+  var exifKeyTimer;
+  exifField.addEventListener('keyup', function(e) {
+    clearTimeout(exifKeyTimer);
+    exifKeyTimer = setTimeout(saveExif, 1000);
+  });
+
+  function saveExif(e) {
+    if (exifField.value != fittr.DEFAULT_EXIF) {
+      localStorage['exif_fields'] = exifField.value;
+    }
+  }
+
+  document.getElementById('resetExif').addEventListener('click', function(e) {
+    if (confirm('Are you sure you want to reset the EXIF field to its default value?')) {
+      localStorage['exif_fields'] = exifField.value = fittr.DEFAULT_EXIF;
+    }
+  });
 </script>
-
-<h1>Fittr Flickr</h1>
-
 </body>
 </html>
