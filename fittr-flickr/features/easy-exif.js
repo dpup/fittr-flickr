@@ -20,26 +20,25 @@
  */
  
 var exif = (function() {
-  
-  var EXIF_TAG_WHITELIST = {
-    Model: 1,    
-    Lens: 1,
-    MeteringMode: 1,
-    ExposureProgram: 1,
-    Flash: 1
-  };
-  
   var link;
   var exifData = {};
   var specialData = {};
-  
-  if (page.getPhotoId()) {
-    link = addPhotoLink('+ ', 'Show/hide additional exif data fields');
-    if (!link) return;
-    link.id = 'fittr-exif-link';
-    link.addEventListener('click', toggleExifDisplay);
-    getExifEl();
-  }
+  var specialExifFields = {};
+
+  prefs.get('exif_fields', function(pref) {
+    var fields = (pref || fittr.DEFAULT_EXIF).split('\n');
+    for (var i = 0; i < fields.length; i++) {
+      specialExifFields[fields[i]] = 1;
+    }
+        
+    if (page.getPhotoId()) {
+      link = addPhotoLink('+ ', 'Show/hide additional exif data fields');
+      if (!link) return;
+      link.id = 'fittr-exif-link';
+      link.addEventListener('click', toggleExifDisplay);
+      getExifEl();
+    }
+  });
   
   var showing = false;
   function toggleExifDisplay(e) {
@@ -60,12 +59,13 @@ var exif = (function() {
     else return {label: '', value: ''};
   }
   
-  function getExifRow(tag, label, value, sectionId) {
+  function getExifRow(tagName, label, value, sectionId) {
     var tr = createEl('tr');
     tr.className = 'fittr-exif-row ' + sectionId;
+    tr.title = 'Tag name = "' + tagName + '"';
     tr.style.display = 'none';
     var td1 = createEl('td');
-    td1.appendChild(createText(label));  //  + ' (' + tag + ')')
+    td1.appendChild(createText(label));
     tr.appendChild(td1);
     var td2 = createEl('td');
     // Bit of a hack to make sure the long Digest fields don't cause the whole page
@@ -100,7 +100,7 @@ var exif = (function() {
               value: value
             };
             
-            if (EXIF_TAG_WHITELIST[item.tag] && !specialData[item.tag]) {
+            if (specialExifFields[item.tag] && !specialData[item.tag]) {
               specialData[item.tag] = exifData[item.tagspace][item.tag];
             }
           }
@@ -109,7 +109,7 @@ var exif = (function() {
           var table = createEl('table', 'fittr-exif-table');
           el.appendChild(table);
           
-          for (var tag in EXIF_TAG_WHITELIST) {
+          for (var tag in specialExifFields) {
             if (specialData[tag]) {
               var label = specialData[tag].label || tag;
               var value = specialData[tag].value || '';
