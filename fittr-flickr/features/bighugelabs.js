@@ -19,8 +19,9 @@
  */
 
 (function() {
-  
+
   // Add a View On Black link to the right bar.
+  // TODO : Delete after new photo page is fully rolled out.
   var el = getEl('li_geo_block');
   if (el) {
     var li = createEl('li');
