@@ -26,7 +26,7 @@ var page = {
   },
 
   getPhotoUrl: function() {
-    var photo = query('div.photoImgDiv img')[0];
+    var photo = query('div.photoImgDiv img')[0] || query('div.photo-div img')[0];
     return photo ? photo.src : null;
   },
 

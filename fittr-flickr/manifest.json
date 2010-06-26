@@ -20,6 +20,7 @@
              "features/canonical-url.js",
              "features/easy-exif.js",
              "features/easy-links.js",
+             "features/fix-the-logo.js",
              "features/light-box.js",
              "features/nice-reply.js",
              "features/tag-autocomplete.js",

@@ -53,17 +53,32 @@ function getLinkArea() {
   var linkArea = getEl('xxxLinkArea');
   if (!linkArea) {
     var photo = query('div.photoImgDiv')[0];
-    if (!photo) return;
-    linkArea = createEl('div');
-    linkArea.id = 'xxxLinkArea';
-    var s = linkArea.style;
-    s.position = 'relative';
-    s.textAlign = 'right';
-    s.fontSize = '80%';
-    s.padding = '2px';
-    s.color = '#999';
-    s.zIndex = 1000;
-    photo.parentNode.insertBefore(linkArea, photo.nextSibling);
+    if (photo) {
+      // For old photo page.
+      linkArea = createEl('div');
+      linkArea.id = 'xxxLinkArea';
+      var s = linkArea.style;
+      s.position = 'relative';
+      s.textAlign = 'right';
+      s.fontSize = '80%';
+      s.padding = '2px';
+      s.color = '#999';
+      s.zIndex = 1000;
+      photo.parentNode.insertBefore(linkArea, photo.nextSibling);
+    } else {
+      // For new photo page.
+      photo = getEl('photo');
+      if (!photo) return;
+      linkArea = createEl('div');
+      linkArea.id = 'xxxLinkArea';
+      var s = linkArea.style;
+      s.textAlign = 'right';
+      s.fontSize = '80%';
+      s.height = '15px';
+      s.padding = '2px';
+      s.color = '#999';
+      photo.parentNode.insertBefore(linkArea, photo.nextSibling);
+    }
   }
   return linkArea;
 }

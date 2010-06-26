@@ -19,7 +19,6 @@
  */
 
 (function() {
-  
   var SHORTCUTS = {
     common: {
       '_title': 'Common Shortcuts',
@@ -30,15 +29,18 @@
     },
     photo: {
       '_title': 'Photo Page',
-      '.': {title: 'Go to the next photo', fn: goNext},
-      ',': {title: 'Go to the previous photo', fn: goPrevious},
+      '\u2190': {title: 'Previous photo', fn: nf},
+      '\u2192': {title: 'Next photo', fn: nf},
+      '<': {title: 'Scroll film strip left', fn: nf},
+      '>': {title: 'Scroll film strip right', fn: nf},
       'U': {title: 'Go up to the photostream/pool/set', fn: goUp},
       'S': {title: 'Star (Add to favorites)', fn: star},
       'X': {title: 'Toggle EXIF preview', fn: function() { if (exif) exif.toggle(); }},
-      'L': {title: 'Open photo in Lightbox', fn: lightbox.open}
+      'L': {title: 'Open photo in Lightbox (old photo page only)', fn: lightbox.open}
     }
   };
   
+  function nf() {}
   
   function showHelp() {
     var div = createEl('div');
@@ -130,7 +132,8 @@
   }
   
   function goUp() {
-    var el = query('.contextTitleOpen a')[0];
+    var el = query('.contextTitleOpen a')[0] ||
+             query('.sidebar-context-open a')[0];  // new photo page
     if (el) {
       location = el.href;
     } else {
