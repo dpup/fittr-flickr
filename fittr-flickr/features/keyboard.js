@@ -142,7 +142,7 @@
   }
   
   function star() {
-    var el = getEl('photo_gne_button_add_to_faves');
+    var el = getEl('photo_gne_button_add_to_faves') || getEl('button-bar-fave');
     if (el) {
       clickElement(el);
     }
