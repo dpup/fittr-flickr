@@ -28,7 +28,8 @@ var exif = (function() {
   prefs.get('exif_fields', function(pref) {
     var fields = (pref || fittr.DEFAULT_EXIF).split('\n');
     for (var i = 0; i < fields.length; i++) {
-      specialExifFields[fields[i]] = 1;
+      var field = fields[i].replace(/^[\s\xa0]+|[\s\xa0]+$/g, '');
+      specialExifFields[field] = 1;
     }
         
     if (page.getPhotoId()) {

@@ -55,6 +55,14 @@
     
     createReplyLink(who, img.src, insertAfter);
   }
+
+  // Look for comments in the new UI, they already have reply so just add a quote option.
+  var replyLinks = query('.comment-reply');
+  for (var i = 0; i < replyLinks.length; i++) {
+    var who = replyLinks[i].parentNode.parentNode.parentNode.querySelector('a.comment-author');
+    createReplyLink(who, '', replyLinks[i]);
+  }
+
   
   function createReplyLink(who, img, el) {
     var link = createEl('a');
@@ -62,7 +70,7 @@
     link.className = 'Plain';  
     link.setAttribute('img', img);
     link.setAttribute('who', who);
-    link.appendChild(createText('reply'));
+    link.appendChild(createText('quote'));
   
     // Find the small links and insert the reply.
     var parent = el.parentNode;
@@ -80,17 +88,24 @@
         selection = tmpDiv.innerHTML.replace(/^[\s\xa0]+|[\s\xa0]+$/g, '');
       }
 
+      var img = e.target.getAttribute('img');
+      var who = e.target.getAttribute('who');
+
       var prefix = inp.value ? '\n' : '';
-      var imageHtml = '<img src="' + e.target.getAttribute('img') +
-          '" width="16" height="16"> &nbsp;';
-      var nameHtml = '<b>' + e.target.getAttribute('who') + '</b>';
+      
+      var imageHtml;
+      if (img != '') {
+        imageHtml = '<img src="' + img +
+          '" width="16" height="16"> &nbsp;<b>' + who + '</b>';
+      } else {
+        imageHtml = '[' + who + ']';
+      }
 
       var content;
       if (selection) {
-        content = prefix + '<i>' + imageHtml + nameHtml + ':  ' +
-            selection + '</i>\n';
+        content = prefix + '<i>' + imageHtml + ':  ' + selection + '</i>\n';
       } else {
-        content = prefix + imageHtml + nameHtml + ': ';
+        content = prefix + imageHtml + ': ';
       }
 
       inp.value = inp.value + content; 

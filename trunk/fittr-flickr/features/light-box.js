@@ -24,7 +24,10 @@ var lightbox = (function() {
   var backgroundClassName;
   var photoId = page.getPhotoId();
   var thePhoto = query('.photoImgDiv img[src="http://l.yimg.com/g/images/spaceball.gif"]')[0] ||
-                 query('.photoImgDiv img')[0];
+                 query('.photoImgDiv img')[0]; // || query('.photo-div img')[0];
+  
+  // TODO : Remove the lightbox once there's no old photo page.
+  
   if (photoId && thePhoto) {
     var dragProxy = getEl('photo-drag-proxy');
     var magnifyEl = createMagnify();

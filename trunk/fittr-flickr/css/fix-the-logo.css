@@ -14,3 +14,16 @@ td.FlickrLogo a:hover {
   width: 180px;
 }
   
+.fittr-logo-fix {
+  position:absolute;
+  height: 35px;
+  width: 100px;
+  background-color: #fff;
+  margin-left:108px;
+  -webkit-transition: margin-left 0.35s ease-out;
+}
+
+#head-logo:hover .fittr-logo-fix {
+  margin-left: 185px;
+}
+

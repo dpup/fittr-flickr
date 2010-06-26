@@ -88,18 +88,22 @@ ul {
 
 <h1><img src="img/logo.128.png" width="64" height="64"> Fittr Flickr</h1>
 
-<!--
+<div class="section-header">Authenticate Fittr Flickr</div>
+<div class="section-sub-header">By default the extension can not access any private information, this
+means certain features won't work for private photos.  By authenticating the extension you are giving
+it <b>read-only</b> access.</div>
+<div class="section"></div>
+
 <div class="section-header">Custom keyboard shortcuts</div>
-<div class="section-sub-header">Change the keybindings for the various <i>Fittr Flickr</i> features.
-Remember, you can always press '?' while on a Flickr page to get a reminder of what they are.</div>
-<div class="content"></div>
--->
+<div class="section-sub-header">Remember, you can always press '?' while on a Flickr page to get a reminder of what they are.</div>
+<div class="section"></div>
+
 
 <div class="section-header">EXIF Settings</div>
 <div class="section">
   <div>Enter the EXIF tags you wish to be displayed at the top of the EXIF expando.<br>
   (one per line)</div>
-  <div><textarea id="exif" rows="10" cols="50" spellchecker="off"></textarea></div>
+  <div><textarea id="exif" rows="10" cols="50" spellcheck="false"></textarea></div>
   <div class="reset"><span class="fakelink" id="resetExif">Reset</span></div>
 
   <div class="info">Cameras and software define various different EXIF fields.  To find the
@@ -124,7 +128,10 @@ Remember, you can always press '?' while on a Flickr page to get a reminder of w
 
   var exifField = document.getElementById('exif');
   exifField.value = localStorage['exif_fields'] || fittr.DEFAULT_EXIF;
-  exifField.addEventListener('change', saveExif);
+  exifField.addEventListener('change', function(e) {
+    clearTimeout(exifKeyTimer);
+    saveExif();
+  });
 
   var exifKeyTimer;
   exifField.addEventListener('keyup', function(e) {
@@ -132,7 +139,7 @@ Remember, you can always press '?' while on a Flickr page to get a reminder of w
     exifKeyTimer = setTimeout(saveExif, 1000);
   });
 
-  function saveExif(e) {
+  function saveExif() {
     if (exifField.value != fittr.DEFAULT_EXIF) {
       localStorage['exif_fields'] = exifField.value;
     }
@@ -143,6 +150,7 @@ Remember, you can always press '?' while on a Flickr page to get a reminder of w
       localStorage['exif_fields'] = exifField.value = fittr.DEFAULT_EXIF;
     }
   });
+
 </script>
 </body>
 </html>
