@@ -60,7 +60,11 @@
   var replyLinks = query('.comment-reply');
   for (var i = 0; i < replyLinks.length; i++) {
     var who = replyLinks[i].parentNode.parentNode.parentNode.querySelector('a.comment-author');
-    createReplyLink(who, '', replyLinks[i]);
+    var name = '';
+    if (who.textContent != '') {
+      var name = who.textContent.split(' ')[0];
+    }
+    createReplyLink('[' + who.href + '] <b>' + name + '</b>: ', '', replyLinks[i]);
   }
 
   
@@ -98,7 +102,21 @@
         imageHtml = '<img src="' + img +
           '" width="16" height="16"> &nbsp;<b>' + who + '</b>';
       } else {
-        imageHtml = '[' + who + ']';
+        imageHtml = who;
+      
+        if (!selection) {
+          // Fragile!
+          try {
+            selection = e.target.
+                parentNode.
+                parentNode.
+                parentNode.
+                parentNode.
+                querySelector('.comment-body').innerText.replace(/^[\s\xa0]+|[\s\xa0]+$/g, '');          
+          } catch (e) {
+            console.log(e);
+          }
+        }
       }
 
       var content;
