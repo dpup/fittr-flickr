@@ -19,7 +19,7 @@
  */
 
 var fittr = {
-  VERSION: '1.5.2',
+  VERSION: '1.6',
 
   // Default exif fields that are shown at the top of the easy-exif expando.
   DEFAULT_EXIF: 'Model\nLens\nMeteringMode\nExposureProgram\nFlash'

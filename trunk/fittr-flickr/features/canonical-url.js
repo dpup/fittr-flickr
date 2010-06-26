@@ -21,6 +21,8 @@
 
 (function() {
 
+  // TODO : Delete after new photo page is fully rolled out.
+  
   function base58Encode(num) {
     var alphabet = '123456789abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ';
   	var enc = '';
