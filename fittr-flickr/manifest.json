@@ -1,6 +1,6 @@
 {
   "name": "Fittr Flickr",
-  "version": "1.6",
+  "version": "1.6.1",
   "description": "Making Flickr more fitter.",
   "content_scripts": [
     {
