@@ -19,11 +19,11 @@ td.FlickrLogo a:hover {
   height: 35px;
   width: 100px;
   background-color: #fff;
-  margin-left:108px;
+  margin-left:108px !important;
   -webkit-transition: margin-left 0.35s ease-out;
 }
 
 #head-logo:hover .fittr-logo-fix {
-  margin-left: 185px;
+  margin-left: 185px !important;
 }
 
